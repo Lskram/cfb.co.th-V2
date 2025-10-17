@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'home',
 ]
 
 MIDDLEWARE = [
@@ -56,13 +57,18 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    "default": dj_database_url.parse(
-        os.getenv("DATABASE_URL", f"sqlite:///{BASE_DIR / 'db.sqlite3'}"),
-        conn_max_age=600,
-        ssl_require=False,
-    )
-}
+_db_url = os.getenv("DATABASE_URL")
+if _db_url:
+    DATABASES = {
+        "default": dj_database_url.parse(_db_url, conn_max_age=600, ssl_require=False)
+    }
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 
 # Password validation
@@ -99,16 +105,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-# Static / Media
 STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"   # collectstatic จะมาลงที่นี่
-STATICFILES_DIRS = [BASE_DIR / "static"] # ไฟล์ static ฝั่งโค้ด
-
-# Static / Media
-STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"   # collectstatic จะมาลงที่นี่
-STATICFILES_DIRS = [BASE_DIR / "static"] # ไฟล์ static ฝั่งโค้ด
-
+STATIC_ROOT = BASE_DIR / "staticfiles"   # ปลายทาง collectstatic (prod/Docker)
+STATICFILES_DIRS = [BASE_DIR / "static"] # ที่เก็บไฟล์ static ตอน dev
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
@@ -117,3 +116,8 @@ MEDIA_ROOT = BASE_DIR / "media"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+CSRF_TRUSTED_ORIGINS = ["http://localhost", "http://127.0.0.1"]
+# ถ้าใช้พอร์ต 8080:
+# CSRF_TRUSTED_ORIGINS = ["http://localhost:8080", "http://127.0.0.1:8080"]
