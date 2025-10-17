@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import index
+from . import views  # ✅ อ้างถึง views ภายในแอป
 
 urlpatterns = [
-    path("", index, name="home-index"),
+    path('', views.index, name='home-index'),  # ✅ เส้นทางหน้าแรก
 ]

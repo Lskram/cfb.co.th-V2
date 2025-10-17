@@ -1,12 +1,36 @@
-<!doctype html>
-<html lang="th">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>{{ title|default:"ยินดีต้อนรับ" }}</title>
-</head>
-<body>
-  <h1>{{ title|default:"ยินดีต้อนรับ" }}</h1>
-  <p>นี่คือหน้าแรกจากโฟลเดอร์ <b>templates/home</b> ✅</p>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}หน้าแรก{% endblock %}
+
+{% block content %}
+<section class="bg-gradient-to-b from-blue-50 to-white">
+  <div class="max-w-7xl mx-auto px-6 py-16 text-center">
+    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 tracking-tight">
+      ยินดีต้อนรับสู่ <span class="text-blue-600">MySite</span>
+    </h1>
+    <p class="mt-4 text-lg text-slate-600">
+      Django + Tailwind + Docker พร้อมใช้งาน 🎉
+    </p>
+    <div class="mt-8 flex items-center justify-center gap-3">
+      <a class="px-5 py-3 rounded-xl bg-blue-600 text-white font-medium shadow hover:bg-blue-700 transition"
+         href="#">เริ่มต้นใช้งาน</a>
+      <a class="px-5 py-3 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-50 transition"
+         href="#">เรียนรู้เพิ่มเติม</a>
+    </div>
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-6 py-12 grid gap-6 md:grid-cols-3">
+  <div class="rounded-xl border p-6 bg-white shadow-sm">
+    <h3 class="text-xl font-semibold text-slate-800">เร็วและเบา</h3>
+    <p class="mt-2 text-slate-600">Tailwind v4 + JIT สร้างเฉพาะคลาสที่ใช้จริง</p>
+  </div>
+  <div class="rounded-xl border p-6 bg-white shadow-sm">
+    <h3 class="text-xl font-semibold text-slate-800">โครงสร้างชัด</h3>
+    <p class="mt-2 text-slate-600">Base template + block content พร้อมต่อหน้าใหม่</p>
+  </div>
+  <div class="rounded-xl border p-6 bg-white shadow-sm">
+    <h3 class="text-xl font-semibold text-slate-800">พร้อมดีพลอย</h3>
+    <p class="mt-2 text-slate-600">Nginx เสิร์ฟไฟล์จาก /static ผ่าน collectstatic</p>
+  </div>
+</section>
+{% endblock %}

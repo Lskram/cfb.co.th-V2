@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+/* บอกแหล่งไฟล์เทมเพลตให้ JIT เก็บ utility ที่ใช้งานจริง */
+@source "./templates/**/*.html";
+@source "./**/templates/**/*.html";
+
+/* (ถ้าต้องการ layer เพิ่มเองค่อยเติมทีหลัง)
+@layer base {}
+@layer components {}
+@layer utilities {}
+*/
